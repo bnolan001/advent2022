@@ -32,10 +32,24 @@ public static class DayFour
     public static void ProblemTwo()
     {
         Console.WriteLine("-----------------------------");
-        var data = File.ReadAllLines("Day04\\Sample.txt");
+        var data = File.ReadAllLines("Day04\\ProblemTwo.txt");
+        int idx = 0;
+        long total = 0;
+        do
+        {
+            var assignments = data[idx].Split(",");
+            var range = assignments[0].Split("-");
+            var elfOne = Enumerable.Range(int.Parse(range[0]), int.Parse(range[1]) - int.Parse(range[0]) + 1);
+            range = assignments[1].Split("-");
+            var elfTwo = Enumerable.Range(int.Parse(range[0]), int.Parse(range[1]) - int.Parse(range[0]) + 1);
+            if (elfOne.Intersect(elfTwo).ToList().Count > 0)
+            {
+                total++;
+            }
 
 
-        Console.WriteLine($"Problem 4.2: {0}");
+        } while (++idx < data.Length);
+        Console.WriteLine($"Problem 4.2: {total}");
         Console.WriteLine("-----------------------------");
     }
 }
