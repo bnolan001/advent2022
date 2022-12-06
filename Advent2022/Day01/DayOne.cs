@@ -5,7 +5,7 @@ public static class DayOne
     public static void ProblemOne()
     {
         Console.WriteLine("-----------------------------");
-        var data = File.ReadAllLines("Day01\\DayOneProblemOne.txt");
+        var data = File.ReadAllLines("Day01\\ProblemOne.txt");
         long elfTotalCalories = 0;
         var elfId = 1;
         var maxCalories = new KeyValuePair<int, long>(elfId, elfTotalCalories);
@@ -37,10 +37,10 @@ public static class DayOne
     public static void ProblemTwo()
     {
         Console.WriteLine("-----------------------------");
-        var data = File.ReadAllLines("Day01\\DayOneProblemTwo.txt");
+        var data = File.ReadAllLines("Day01\\ProblemTwo.txt");
         long elfTotalCalories = 0;
         var elfId = 1;
-        var maxCalories = new List<long> {0, 0, 0};
+        var maxCalories = new List<long> { 0, 0, 0 };
         foreach (var line in data)
             if (string.IsNullOrEmpty(line.Trim()))
             {

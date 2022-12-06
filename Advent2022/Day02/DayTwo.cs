@@ -23,7 +23,7 @@ public static class DayTwo
     public static void ProblemOne()
     {
         Console.WriteLine("-----------------------------");
-        var data = File.ReadAllLines("Day02\\DayTwoProblemOne.txt");
+        var data = File.ReadAllLines("Day02\\ProblemOne.txt");
         var score = 0;
 
         foreach (var line in data)
@@ -86,7 +86,7 @@ public static class DayTwo
     public static void ProblemTwo()
     {
         Console.WriteLine("-----------------------------");
-        var data = File.ReadAllLines("Day02\\DayTwoProblemTwo.txt");
+        var data = File.ReadAllLines("Day02\\ProblemTwo.txt");
         var score = 0;
 
         foreach (var line in data)
