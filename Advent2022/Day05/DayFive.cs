@@ -1,4 +1,4 @@
-﻿namespace Advent2022.Day04;
+﻿namespace Advent2022.Day05;
 
 public static class DayFive
 {
@@ -6,13 +6,10 @@ public static class DayFive
     {
         Console.WriteLine("-----------------------------");
         var data = File.ReadAllLines("Day05\\ProblemOne.txt");
-        int idx = 0;
-        long totalColumns = (data[idx].Length / 4) + 1;
+        var idx = 0;
+        long totalColumns = data[idx].Length / 4 + 1;
         var ship = new List<List<string>>(data[idx].Length / 4);
-        for (var i = 0; i < totalColumns; i++)
-        {
-            ship.Add(new List<string>());
-        }
+        for (var i = 0; i < totalColumns; i++) ship.Add(new List<string>());
 
         while (data[idx].Contains("["))
         {
@@ -20,11 +17,9 @@ public static class DayFive
             for (var splitIdx = 0; splitIdx < text.Length; splitIdx += 4)
             {
                 var crate = text.Substring(splitIdx, 3).Trim();
-                if (!string.IsNullOrWhiteSpace(crate))
-                {
-                    ship[splitIdx / 4].Add(crate.Substring(1, 1));
-                }
+                if (!string.IsNullOrWhiteSpace(crate)) ship[splitIdx / 4].Add(crate.Substring(1, 1));
             }
+
             idx++;
         }
 
@@ -52,13 +47,10 @@ public static class DayFive
     {
         Console.WriteLine("-----------------------------");
         var data = File.ReadAllLines("Day05\\ProblemTwo.txt");
-        int idx = 0;
-        long totalColumns = (data[idx].Length / 4) + 1;
+        var idx = 0;
+        long totalColumns = data[idx].Length / 4 + 1;
         var ship = new List<List<string>>(data[idx].Length / 4);
-        for (var i = 0; i < totalColumns; i++)
-        {
-            ship.Add(new List<string>());
-        }
+        for (var i = 0; i < totalColumns; i++) ship.Add(new List<string>());
 
         while (data[idx].Contains("["))
         {
@@ -66,11 +58,9 @@ public static class DayFive
             for (var splitIdx = 0; splitIdx < text.Length; splitIdx += 4)
             {
                 var crate = text.Substring(splitIdx, 3).Trim();
-                if (!string.IsNullOrWhiteSpace(crate))
-                {
-                    ship[splitIdx / 4].Add(crate.Substring(1, 1));
-                }
+                if (!string.IsNullOrWhiteSpace(crate)) ship[splitIdx / 4].Add(crate.Substring(1, 1));
             }
+
             idx++;
         }
 
