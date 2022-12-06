@@ -16,3 +16,6 @@ DayThree.ProblemTwo();
 
 DayFour.ProblemOne();
 DayFour.ProblemTwo();
+
+DayFive.ProblemOne();
+DayFive.ProblemTwo();
