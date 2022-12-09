@@ -1,6 +1,6 @@
 ﻿namespace Advent2022.Day05;
 
-public static class DayFive
+public class DayFive
 {
     public static void ProblemOne()
     {

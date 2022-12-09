@@ -1,6 +1,6 @@
 ﻿namespace Advent2022.Day02;
 
-public static class DayTwo
+public class DayTwo
 {
     private static int FindWinner(PlayEnum them, PlayEnum me)
     {
