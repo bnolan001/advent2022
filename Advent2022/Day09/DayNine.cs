@@ -5,7 +5,7 @@
         public static void ProblemOne()
         {
             Console.WriteLine("-----------------------------");
-            var data = File.ReadAllLines("Day09\\Sample.txt");
+            var data = File.ReadAllLines("Day09\\ProblemOne.txt");
             var head = new RopePoint { X = 0, Y = 0 };
             var tail = new RopePoint { X = 0, Y = 0 };
             var visitedPoints = new HashSet<string>();
@@ -40,8 +40,8 @@
                     head.Y += moveY;
 
                     // Head has moved more than one block away from the Tail
-                    if (head.X - tail.X > 1
-                        || head.Y - tail.Y > 1)
+                    if (Math.Abs(head.X - tail.X) > 1
+                        || Math.Abs(head.Y - tail.Y) > 1)
                     {
                         if (head.X == tail.X)
                         {
@@ -79,13 +79,117 @@
             Console.WriteLine("-----------------------------");
         }
 
+        public static void PrintRope(List<RopePoint> knots)
+        {
+            var grid = new List<List<string>>();
+            for (int row = 0; row < 40; row++)
+            {
+                grid.Add(Enumerable.Repeat(".", 40).ToList());
+            }
 
+            var idx = 0;
+            foreach (var knot in knots)
+            {
+                grid[knot.Y + 20][knot.X + 20] = idx.ToString();
+                idx++;
+            }
+
+            Console.WriteLine();
+            grid.Reverse();
+            foreach (var row in grid)
+            {
+                Console.WriteLine(String.Join(" ", row));
+            }
+        }
         public static void ProblemTwo()
         {
             Console.WriteLine("-----------------------------");
             var data = File.ReadAllLines("Day09\\Sample.txt");
+            var knots = new List<RopePoint>()
+            { new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 },
+                new RopePoint { X = 0, Y = 0 } };
 
-            Console.WriteLine($"Problem 9.2: {0}");
+            var visitedPoints = new HashSet<string>();
+            foreach (var movement in data)
+            {
+                var direction = movement[0];
+                var spaces = int.Parse(movement.Substring(1).Trim());
+                int moveY = 0;
+                int moveX = 0;
+                switch (direction)
+                {
+                    case 'U':
+                        moveY = 1;
+                        break;
+
+                    case 'D':
+                        moveY = -1;
+                        break;
+
+                    case 'L':
+                        moveX = -1;
+                        break;
+
+                    case 'R':
+                        moveX = 1;
+                        break;
+                }
+
+                for (int i = 0; i < spaces; i++)
+                {
+                    knots[0].X += moveX;
+                    knots[0].Y += moveY;
+                    for (var idx = 1; idx < knots.Count; idx++)
+                    {
+                        // Head has moved more than one block away from the Tail
+                        if (Math.Abs(knots[idx - 1].X - knots[idx].X) > 1
+                            || Math.Abs(knots[idx - 1].Y - knots[idx].Y) > 1)
+                        {
+                            if (knots[idx - 1].X == knots[idx].X)
+                            {
+                                knots[idx].Y += moveY;
+                            }
+                            else if (knots[idx - 1].Y == knots[idx].Y)
+                            {
+                                knots[idx].X += moveX;
+                            }
+                            // Move on the diagonal
+                            else
+                            {
+                                switch (direction)
+                                {
+                                    case 'U':
+                                    case 'D':
+                                        var diagX = (knots[idx - 1].X - knots[idx].X) / 2;
+                                        knots[idx].X += diagX;
+                                        knots[idx].Y += moveY;
+                                        break;
+
+                                    case 'L':
+                                    case 'R':
+                                        var diagY = (knots[idx - 1].Y - knots[idx].Y) / 2;
+                                        knots[idx].Y += diagY;
+                                        knots[idx].X += moveX;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    visitedPoints.Add($"{knots[8].X}-{knots[8].Y}");
+                    //Console.WriteLine($"Head: {knots[0].X}/{knots[0].Y}, tail: {knots[8].X}/{knots[8].Y}");
+                }
+                PrintRope(knots);
+            }
+
+            Console.WriteLine($"Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
             Console.WriteLine("-----------------------------");
         }
     }
