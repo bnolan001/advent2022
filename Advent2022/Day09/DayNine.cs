@@ -82,15 +82,15 @@
         public static void PrintRope(List<RopePoint> knots)
         {
             var grid = new List<List<string>>();
-            for (int row = 0; row < 40; row++)
+            for (int row = 0; row < 80; row++)
             {
-                grid.Add(Enumerable.Repeat(".", 40).ToList());
+                grid.Add(Enumerable.Repeat(".", 80).ToList());
             }
 
             var idx = 0;
             foreach (var knot in knots)
             {
-                grid[knot.Y + 20][knot.X + 20] = idx.ToString();
+                grid[knot.Y + 40][knot.X + 40] = idx.ToString();
                 idx++;
             }
 
@@ -104,7 +104,7 @@
         public static void ProblemTwo()
         {
             Console.WriteLine("-----------------------------");
-            var data = File.ReadAllLines("Day09\\Sample.txt");
+            var data = File.ReadAllLines("Day09\\ProblemTwo.txt");
             var knots = new List<RopePoint>()
             { new RopePoint { X = 0, Y = 0 },
                 new RopePoint { X = 0, Y = 0 },
@@ -142,7 +142,7 @@
                         moveX = 1;
                         break;
                 }
-
+                char knotDirection = direction;
                 for (int i = 0; i < spaces; i++)
                 {
                     knots[0].X += moveX;
@@ -156,27 +156,29 @@
                             if (knots[idx - 1].X == knots[idx].X)
                             {
                                 knots[idx].Y += moveY;
+                                knotDirection = moveY > 0 ? 'U' : 'D';
                             }
                             else if (knots[idx - 1].Y == knots[idx].Y)
                             {
                                 knots[idx].X += moveX;
+                                knotDirection = moveX > 0 ? 'R' : 'L';
                             }
                             // Move on the diagonal
                             else
                             {
-                                switch (direction)
+                                switch (knotDirection)
                                 {
                                     case 'U':
                                     case 'D':
-                                        var diagX = (knots[idx - 1].X - knots[idx].X) / 2;
-                                        knots[idx].X += diagX;
+                                        var diagX = Math.Ceiling((knots[idx - 1].X - knots[idx].X) / 2.0);
+                                        knots[idx].X += (int)diagX;
                                         knots[idx].Y += moveY;
                                         break;
 
                                     case 'L':
                                     case 'R':
-                                        var diagY = (knots[idx - 1].Y - knots[idx].Y) / 2;
-                                        knots[idx].Y += diagY;
+                                        var diagY = Math.Ceiling((knots[idx - 1].Y - knots[idx].Y) / 2.0);
+                                        knots[idx].Y += (int)diagY;
                                         knots[idx].X += moveX;
                                         break;
                                 }
@@ -184,12 +186,11 @@
                         }
                     }
                     visitedPoints.Add($"{knots[8].X}-{knots[8].Y}");
-                    //Console.WriteLine($"Head: {knots[0].X}/{knots[0].Y}, tail: {knots[8].X}/{knots[8].Y}");
                 }
-                PrintRope(knots);
+                //PrintRope(knots);
             }
 
-            Console.WriteLine($"Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
+            Console.WriteLine($"WIP Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
             Console.WriteLine("-----------------------------");
         }
     }
