@@ -149,48 +149,36 @@
                     knots[0].Y += moveY;
                     for (var idx = 1; idx < knots.Count; idx++)
                     {
-                        // Head has moved more than one block away from the Tail
-                        if (Math.Abs(knots[idx - 1].X - knots[idx].X) > 1
-                            || Math.Abs(knots[idx - 1].Y - knots[idx].Y) > 1)
+                        //Calculate distance to previous knot
+                        var xDiff = knots[idx - 1].X - knots[idx].X;
+                        var yDiff = knots[idx - 1].Y - knots[idx].Y;
+                        if (Math.Abs(xDiff) > 1
+                            || Math.Abs(yDiff) > 1)
                         {
-                            if (knots[idx - 1].X == knots[idx].X)
+                            if (Math.Abs(xDiff) + Math.Abs(yDiff) > 2)
                             {
-                                knots[idx].Y += moveY;
-                                knotDirection = moveY > 0 ? 'U' : 'D';
+                                knots[idx].X += xDiff > 0 ? 1 : -1;
+                                knots[idx].Y += yDiff > 0 ? 1 : -1;
                             }
-                            else if (knots[idx - 1].Y == knots[idx].Y)
-                            {
-                                knots[idx].X += moveX;
-                                knotDirection = moveX > 0 ? 'R' : 'L';
-                            }
-                            // Move on the diagonal
                             else
                             {
-                                switch (knotDirection)
+                                if (xDiff == 0)
                                 {
-                                    case 'U':
-                                    case 'D':
-                                        var diagX = Math.Ceiling((knots[idx - 1].X - knots[idx].X) / 2.0);
-                                        knots[idx].X += (int)diagX;
-                                        knots[idx].Y += moveY;
-                                        break;
-
-                                    case 'L':
-                                    case 'R':
-                                        var diagY = Math.Ceiling((knots[idx - 1].Y - knots[idx].Y) / 2.0);
-                                        knots[idx].Y += (int)diagY;
-                                        knots[idx].X += moveX;
-                                        break;
+                                    knots[idx].Y += (int)Math.Ceiling(yDiff / 2.0);
+                                }
+                                else
+                                {
+                                    knots[idx].X += (int)Math.Ceiling(xDiff / 2.0);
                                 }
                             }
                         }
                     }
-                    visitedPoints.Add($"{knots[8].X}-{knots[8].Y}");
+                    visitedPoints.Add($"{knots[knots.Count - 1].X}-{knots[knots.Count - 1].Y}");
                 }
                 //PrintRope(knots);
             }
 
-            Console.WriteLine($"WIP Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
+            Console.WriteLine($"Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
             Console.WriteLine("-----------------------------");
         }
     }
