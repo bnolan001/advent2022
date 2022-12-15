@@ -7,6 +7,7 @@ using Advent2022.Day06;
 using Advent2022.Day07;
 using Advent2022.Day08;
 using Advent2022.Day09;
+using Advent2022.Day10;
 
 DayOne.ProblemOne();
 DayOne.ProblemTwo();
@@ -34,3 +35,6 @@ DayEight.ProblemTwo();
 
 DayNine.ProblemOne();
 DayNine.ProblemTwo();
+
+DayTen.ProblemOne();
+DayTen.ProblemTwo();

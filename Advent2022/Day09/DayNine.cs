@@ -178,7 +178,7 @@
                 //PrintRope(knots);
             }
 
-            Console.WriteLine($"Problem 9.2: {visitedPoints.Count}"); // 2758 is too high
+            Console.WriteLine($"Problem 9.2: {visitedPoints.Count}");
             Console.WriteLine("-----------------------------");
         }
     }
